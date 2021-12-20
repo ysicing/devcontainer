@@ -1,39 +1,31 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/kubernetes-helm-minikube
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/docker-in-docker
 {
-	"name": "Kubernetes - Minikube-in-Docker",
+	"name": "Docker in Docker",
 	"dockerFile": "Dockerfile",
-	"runArgs": ["--privileged"],
-	"mounts": [
-		"source=minikube-var-lib-docker,target=/var/lib/docker,type=volume",
-		"source=minikube-config,target=/home/vscode/.minikube,type=volume",
-	],
+	"runArgs": ["--init", "--privileged"],
+	"mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"overrideCommand": false,
-
+	
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
-
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-azuretools.vscode-docker",
 		"ms-kubernetes-tools.vscode-kubernetes-tools"
 	],
-
+	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "kubectl version",
+	// "postCreateCommand": "docker --version",
 
-	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
-	// "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
-
-	// Minikube does not like running as root, so use a non-root user.
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
-		"git": "latest",
-		"git-lfs": "latest",
-		"golang": "1.17"
+		"git": "os-provided",
+		"golang": "latest"
 	}
 }
