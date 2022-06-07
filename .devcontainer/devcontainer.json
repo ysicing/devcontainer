@@ -1,18 +1,69 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/docker-in-docker
 {
-	"name": "Docker in Docker",
+	"name": "project-godev",
 	"dockerFile": "Dockerfile",
 	"runArgs": ["--init", "--privileged"],
 	"mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"overrideCommand": false,
 	
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+        "files.eol": "\n",
+        "remote.extensionKind": {
+            "ms-azuretools.vscode-docker": "workspace"
+        },
+        "go.useLanguageServer": true,
+        "[go]": {
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": true
+            },
+        },
+        "[go.mod]": {
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": true
+            }
+        },
+        "gopls": {
+            "build.buildFlags": [
+                "-tags",
+                ""
+            ],
+            "usePlaceholders": false,
+            "staticcheck": true,
+        },
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "package",
+        "editor.formatOnSave": true,
+        "go.toolsEnvVars": {
+            "CGO_ENABLED": 0
+        },
+        "go.testEnvVars": {
+            "": "",
+        },
+        "go.testFlags": [
+            "-v",
+            "-race"
+        ],
+        "go.testTimeout": "10s",
+        "go.coverOnSingleTest": true,
+        "go.coverOnSingleTestFile": true,
+        "go.coverOnTestPackage": true
+	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-azuretools.vscode-docker",
-		"ms-kubernetes-tools.vscode-kubernetes-tools"
+		"golang.go",
+		"eamodio.gitlens", // IDE Git information
+		"davidanson.vscode-markdownlint", // Markdown linting
+		"ms-azuretools.vscode-docker", // Docker integration and linting
+		"ms-kubernetes-tools.vscode-kubernetes-tools",
+		"shardulm94.trailing-spaces", // Show trailing spaces
+		"Gruntfuggly.todo-tree", // Highlights TODO comments
+		"bierner.emojisense", // Emoji sense for markdown
+		"stkb.rewrap", // rewrap comments after n characters on one line
+		"vscode-icons-team.vscode-icons", // Better file extension icons
+		"redhat.vscode-yaml", // Kubernetes, Drone syntax highlighting
+		"mohsen1.prettify-json", // Prettify JSON data
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
