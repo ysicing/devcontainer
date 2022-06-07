@@ -76,7 +76,5 @@
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
-		"git": "os-provided",
-		"golang": "latest"
 	}
 }

@@ -1,1 +1,1 @@
-FROM ysicing/devcontainer
+FROM qmcgaw/godevcontainer
